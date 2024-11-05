@@ -1,4 +1,4 @@
-import pygame.
+import pygame
 import random
 import sys
 from config import HEIGHT, FPS, WHITE, WIDTH, BLACK
