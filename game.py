@@ -9,7 +9,7 @@ pygame.font.init()
 font = pygame.font.SysFont(None, 48)
 
 class Game:
-    def _init(self):  # Corregido de _init a _init_
+    def _init(self): 
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Speedrunner")
 
@@ -66,11 +66,11 @@ class Game:
         player_rect = self.player.get_rect()
         for obstacle in self.obstacles:
             if player_rect.colliderect(obstacle.rect):
-                self.health -= self.collision_damage  # Reducir salud
-                self.obstacles.remove(obstacle)  # Elimina obstáculo después de colisión
+                self.health -= self.collision_damage  
+                self.obstacles.remove(obstacle)  
             if self.health <= 0:
-                self.lives -= 1  # Reduce una vida
-                self.health = self.max_health  # Restablece la salud
+                self.lives -= 1  
+                self.health = self.max_health 
 
                 if self.lives <= 0:
                     self.draw_text("¡Perdiste!", font, BLACK, self.screen, WIDTH // 2, HEIGHT // 2)
@@ -80,7 +80,7 @@ class Game:
                     sys.exit()
 
             elif obstacle.rect.x == 0:
-                self.score += 1  # Incrementar el puntaje cuando el obstáculo ha pasado
+                self.score += 1  
 
     def draw(self):
         self.screen.blit(self.background_image, (self.background_scroll, 0))
@@ -94,14 +94,14 @@ class Game:
         for obstacle in self.obstacles:
             obstacle.draw(self.screen)
 
-        # Mostrar texto de Vidas, Salud y Puntaje
+        
         self.draw_text(f"Vidas: {self.lives}", font, BLACK, self.screen, 100, 30)
         self.draw_text(f"Puntaje: {self.score}", font, BLACK, self.screen, 350, 30)
         self.draw_text(f"Salud: {self.health}/{self.max_health}", font, BLACK, self.screen, 125, 60)
 
         # Barra de salud
-        pygame.draw.rect(self.screen, BLACK, (125, 75, 200, 20))  # Fondo de la barra de salud
-        pygame.draw.rect(self.screen, (255, 0, 0), (125, 75, (200 * self.health) // self.max_health, 20))  # Barra de salud
+        pygame.draw.rect(self.screen, BLACK, (125, 75, 200, 20)) 
+        pygame.draw.rect(self.screen, (255, 0, 0), (125, 75, (200 * self.health) // self.max_health, 20))  
 
     def draw_text(self, text, font, color, surface, x, y):
         textobj = font.render(text, True, color)
